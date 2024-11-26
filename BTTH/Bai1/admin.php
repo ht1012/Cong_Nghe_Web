@@ -1,6 +1,6 @@
  <?php include 'data.php';
-    session_start();
     $flowers = isset($_SESSION['flowers']) ? $_SESSION['flowers'] : [];
+    session_start();
     ?>
  <!DOCTYPE html>
  <html lang="en">
