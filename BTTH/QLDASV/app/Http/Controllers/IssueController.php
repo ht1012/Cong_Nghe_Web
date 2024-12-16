@@ -23,37 +23,41 @@ class IssueController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'computer_name' => 'required|max:50',
-            'model' => 'required|max:100',
-            'reported_by' => 'required|max:50',
-            'reported_date' => 'required|date_format:Y-m-d H:i:s',
-            'urgency' => 'required|in:low,Medium,High',
-            'status' => 'required|in:Open,In progress,Resolved',
-        ]);
-
+        // Kiểm tra dữ liệu đầu vào (validation)
+        $request->validate(
+            [
+                'computer_id' => 'required',
+                'reported_by' => 'required|max:50',
+                'reported_date' => 'required|date',
+                'description' => 'required',
+                'urgency' => 'required',
+                'status' => 'required'
+            ]
+        );
         Issues::create($request->all());
-        return redirect()->route('issuse.index')->with('success', 'Da them thanh cong');
+        return redirect()->route('issues.index')->with('success', 'Vấn đề đã được thêm thành công');
     }
 
     public function edit($id)
     {
-        $issues = Issues::findOrFail($id);
+        $issue = Issues::findOrFail($id);
         $computers = Computers::all();
-        return view('issues.edit', compact('issues', 'computers'));
+        return view('issues.edit', compact('issue', 'computers'));
     }
 
     public function update(Request $request, $id)
     {
         // Kiểm tra dữ liệu đầu vào (validation)
-        $request->validate([
-            'computer_name' => 'required|max:50',
-            'model' => 'required|max:100',
-            'reported_by' => 'required|max:50',
-            'reported_date' => 'required|date_format:Y-m-d H:i:s',
-            'urgency' => 'required|in:low,Medium,High',
-            'status' => 'required|in:Open,In progress,Resolved',
-        ]);
+        $request->validate(
+            [
+                'computer_id' => 'required',
+                'reported_by' => 'required|max:50',
+                'reported_date' => 'required|date',
+                'description' => 'required',
+                'urgency' => 'required',
+                'status' => 'required'
+            ]
+        );
 
         $issues = Issues::find($id);
 

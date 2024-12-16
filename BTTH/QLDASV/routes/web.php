@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IssueController;
 
 // Đường dẫn hiển thị danh sách 
-
 Route::get('/', [IssueController::class, 'index'])->name('issues.index');
 
 // (hiển thị form thêm mới)

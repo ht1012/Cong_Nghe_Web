@@ -18,7 +18,7 @@ class IssuesTableSeeder extends Seeder
         $faker = Faker::create();
         foreach (range(1, 10) as $index) {
             DB::table('issues')->insert([
-                'computer_id' => $faker->numberBetween(1, 10),
+                'computer_id' => $faker->numberBetween(1, 100),
                 'reported_by' => $faker->name,
                 'reported_date' => now(),
                 'description' => $faker->sentence,
@@ -28,5 +28,5 @@ class IssuesTableSeeder extends Seeder
                 'updated_at' => now(),
             ]);
         }
-    }
+    } 
 }
